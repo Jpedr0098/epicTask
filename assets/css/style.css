@@ -20,3 +20,15 @@ body {
     */
 }
 
+form{
+    max-width: 600px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.acoes {
+    display: flex;
+    justify-content: space-around;
+}
