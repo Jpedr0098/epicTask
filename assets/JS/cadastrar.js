@@ -10,18 +10,18 @@ document.querySelector("#botao-cadastrar").addEventListener("click", () => {
 
     validar(tarefa)
 
-    console.log(tarefa)
+    salvar(tarefa)
 })
 
+function salvar(tarefa){
+    const tarefas = JSON.parse(localStorage.getItem("tarefas")) || []
+    tarefas.push(tarefa)
+    localStorage.setItem("tarefas", JSON.stringify(tarefas))
+    window.location.href = "index.html"
+}
+
 function validar(tarefa){
-    document.querySelector("#titulo").classList.remove("is-error")
-    document.querySelector("#descricao").classList.remove("is-error")
-    document.querySelector("#pontos").classList.remove("is-error")
-    document.querySelector("#titulo-erro").innerText = ""
-    document.querySelector("#descricao-erro").innerText = ""
-    document.querySelector("#pontos-erro").innerText = ""
-
-
+    limparErros()
     
     if (tarefa.title.trim() == ""){
         document.querySelector("#titulo").classList.add("is-error")
@@ -38,4 +38,12 @@ function validar(tarefa){
         document.querySelector("#pontos-erro").innerText = "Os pontos devem ser maiores que zero!"
         console.log("Ta no erro irmão...")
     }
+}
+
+function limparErros(){
+    document.querySelectorAll("input.is-error, textarea.is-error")
+    .forEach((input)=>{input.classList.remove("is-error")})
+
+    document.querySelectorAll(".nes-field span")
+    .forEach((span)=> span.innerText="")
 }
