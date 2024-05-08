@@ -3,6 +3,7 @@ document.querySelector("#botao-cadastrar").addEventListener("click", () => {
     const form = document.querySelector("form")
 
     const tarefa = {
+        id: "id_" + new Date().getTime(),
         title: form.titulo.value,
         descricao: form.descricao.value,
         pontos: form.pontos.value
