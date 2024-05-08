@@ -9,9 +9,11 @@ document.querySelector("#botao-cadastrar").addEventListener("click", () => {
         pontos: form.pontos.value
     }
 
-    validar(tarefa)
+    const confirmar = validar(tarefa)
 
-    salvar(tarefa)
+    if (confirmar == 0) {
+        salvar(tarefa)
+    }
 })
 
 function salvar(tarefa){
@@ -23,22 +25,24 @@ function salvar(tarefa){
 
 function validar(tarefa){
     limparErros()
+    let erro = 0
     
     if (tarefa.title.trim() == ""){
         document.querySelector("#titulo").classList.add("is-error")
         document.querySelector("#titulo-erro").innerText = "Titulo é obrigatório!"
-        console.log("Ta no erro irmão...")
+        erro = 1
     }
     if (tarefa.descricao.trim() == "" || tarefa.descricao.lenght < 10){
         document.querySelector("#descricao").classList.add("is-error")
         document.querySelector("#descricao-erro").innerText = "descricao deve ter no minimo 10 caracteres"
-        console.log("Ta no erro irmão...")
+        erro = 1
     }
     if (tarefa.pontos <= 0){
         document.querySelector("#pontos").classList.add("is-error")
         document.querySelector("#pontos-erro").innerText = "Os pontos devem ser maiores que zero!"
-        console.log("Ta no erro irmão...")
+        erro = 1
     }
+    return erro
 }
 
 function limparErros(){
